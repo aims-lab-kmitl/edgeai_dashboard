@@ -1,0 +1,648 @@
+[
+    {
+        "id": "7cc34c98f6edd7a1",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8a995ee306af51a4",
+        "type": "mqtt in",
+        "z": "7cc34c98f6edd7a1",
+        "name": "sensor/data",
+        "topic": "sensor/data",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a6061099b614bb94",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "b3b5692baaeeb3d1",
+                "6335d1d6c9ddcdfc",
+                "80f038ea62eaa234",
+                "cf03e4f02b7bf919",
+                "2def981f6f096b26",
+                "2d3320c76f3816b7",
+                "ede77ea0e41b4cef"
+            ]
+        ]
+    },
+    {
+        "id": "b3b5692baaeeb3d1",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Accelerometer",
+        "func": "var acc = msg.payload.acc || [0,0,0];\n\nvar msgAccX = { topic: \"accX\", payload: acc[0] };\nvar msgAccY = { topic: \"accY\", payload: acc[1] };\nvar msgAccZ = { topic: \"accZ\", payload: acc[2] };\n\nreturn [msgAccX, msgAccY, msgAccZ];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "5aba66629fe8dbdc",
+                "6a12ec7f8a1e685f"
+            ],
+            [
+                "5aba66629fe8dbdc"
+            ],
+            [
+                "5aba66629fe8dbdc"
+            ]
+        ]
+    },
+    {
+        "id": "5aba66629fe8dbdc",
+        "type": "ui_chart",
+        "z": "7cc34c98f6edd7a1",
+        "name": "",
+        "group": "6cd1aed242ce2493",
+        "order": 1,
+        "width": 10,
+        "height": 6,
+        "label": "Accelerometer",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "150",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 760,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6335d1d6c9ddcdfc",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Gyrometer",
+        "func": "var gyr = msg.payload.gyr || [0,0,0];\n\nvar msgGyrX = { topic: \"gyrX\", payload: gyr[0] };\nvar msgGyrY = { topic: \"gyrY\", payload: gyr[1] };\nvar msgGyrZ = { topic: \"gyrZ\", payload: gyr[2] };\n\nreturn [msgGyrX, msgGyrY, msgGyrZ];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "0fbaae65e3f39a56"
+            ],
+            [
+                "0fbaae65e3f39a56"
+            ],
+            [
+                "0fbaae65e3f39a56"
+            ]
+        ]
+    },
+    {
+        "id": "0fbaae65e3f39a56",
+        "type": "ui_chart",
+        "z": "7cc34c98f6edd7a1",
+        "name": "",
+        "group": "6cd1aed242ce2493",
+        "order": 2,
+        "width": 10,
+        "height": 6,
+        "label": "Gyrometer",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "150",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80f038ea62eaa234",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Temperature",
+        "func": "var tem = msg.payload.tem\nvar msgTem = { topic: \"temp\", payload: tem };\n\nreturn msgTem;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 300,
+        "wires": [
+            [
+                "9e1adeac8d4bad91"
+            ]
+        ]
+    },
+    {
+        "id": "9e1adeac8d4bad91",
+        "type": "ui_gauge",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Temperature",
+        "group": "9eb20a8bfa7efbf7",
+        "order": 1,
+        "width": 10,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "Celsius",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "cf03e4f02b7bf919",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Pressuure",
+        "func": "var pre = msg.payload.pre\nvar msgPre = { topic: \"pres\", payload: pre };\n\nreturn msgPre;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "c6262275ad7241e8"
+            ]
+        ]
+    },
+    {
+        "id": "c6262275ad7241e8",
+        "type": "ui_gauge",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Pressure",
+        "group": "9eb20a8bfa7efbf7",
+        "order": 2,
+        "width": 10,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Pressure",
+        "label": "kPa",
+        "format": "{{value}}",
+        "min": "90",
+        "max": "110",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2def981f6f096b26",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Audio",
+        "func": "var aud = msg.payload.aud\nvar msgAui = { topic: \"audio\", payload: aud };\n\nreturn msgAui;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 420,
+        "wires": [
+            [
+                "5e971b9636acf14b"
+            ]
+        ]
+    },
+    {
+        "id": "5e971b9636acf14b",
+        "type": "ui_chart",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Audio",
+        "group": "56bfe6aad72c50ac",
+        "order": 1,
+        "width": 10,
+        "height": 6,
+        "label": "Audio",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "150",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d3320c76f3816b7",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Gesture",
+        "func": "var gesture = msg.payload.ges;  \n//             gesture[0],gesture[1],gesture[2],gesture[3]\nvar gestures = [\"UP\",     \"DOWN\",    \"LEFT\",    \"RIGHT\"];\nvar gestureText = gestures[gesture] || \"Not Detect\";\n\nmsg.payload = gestureText;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "ea2526160be411ea"
+            ]
+        ]
+    },
+    {
+        "id": "ea2526160be411ea",
+        "type": "ui_text",
+        "z": "7cc34c98f6edd7a1",
+        "group": "56bfe6aad72c50ac",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "name": "Gesture",
+        "label": "Gesture Detect",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 740,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6a12ec7f8a1e685f",
+        "type": "ui_gauge",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Guage_accX",
+        "group": "56bfe6aad72c50ac",
+        "order": 2,
+        "width": 10,
+        "height": 6,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-1",
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ede77ea0e41b4cef",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "CaseNumber",
+        "func": "var number = msg.payload.num;  \nvar caseDetect = [\"Background\", \"Hello\", \"Hay\"];\nvar castText = caseDetect[number] || \"Not Detect\";\n\nmsg.payload = castText;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 560,
+        "wires": [
+            [
+                "83638849a341b404"
+            ]
+        ]
+    },
+    {
+        "id": "83638849a341b404",
+        "type": "ui_text",
+        "z": "7cc34c98f6edd7a1",
+        "group": "56bfe6aad72c50ac",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "name": "Word Detect",
+        "label": "Word Detect:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b5436b1628093ac4",
+        "type": "ui_text_input",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Control Value",
+        "label": "Control Value: ",
+        "tooltip": "",
+        "group": "6cd1aed242ce2493",
+        "order": 3,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "payload",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 180,
+        "y": 640,
+        "wires": [
+            [
+                "4a4ec1b91c009219"
+            ]
+        ]
+    },
+    {
+        "id": "4a4ec1b91c009219",
+        "type": "change",
+        "z": "7cc34c98f6edd7a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "control_value",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 640,
+        "wires": [
+            [
+                "ecdb3c6c5db44b24"
+            ]
+        ]
+    },
+    {
+        "id": "ecdb3c6c5db44b24",
+        "type": "ui_button",
+        "z": "7cc34c98f6edd7a1",
+        "name": "Send Data",
+        "group": "6cd1aed242ce2493",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "Send Data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 710,
+        "y": 640,
+        "wires": [
+            [
+                "0de3d4f136faae26"
+            ]
+        ]
+    },
+    {
+        "id": "0de3d4f136faae26",
+        "type": "function",
+        "z": "7cc34c98f6edd7a1",
+        "name": "send data function",
+        "func": "var data = {\n    data: parseInt(flow.get(\"control_value\"))\n};\nmsg.payload = JSON.stringify(data);\nmsg.topic = \"control\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 640,
+        "wires": [
+            [
+                "987ea7d95ba194fa"
+            ]
+        ]
+    },
+    {
+        "id": "987ea7d95ba194fa",
+        "type": "mqtt out",
+        "z": "7cc34c98f6edd7a1",
+        "name": "control",
+        "topic": "control",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a6061099b614bb94",
+        "x": 1230,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a6061099b614bb94",
+        "type": "mqtt-broker",
+        "name": "ble_mqtt",
+        "broker": "192.168.56.1",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6cd1aed242ce2493",
+        "type": "ui_group",
+        "name": "Chart",
+        "tab": "e1a7148b3e7c808d",
+        "order": 1,
+        "disp": false,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9eb20a8bfa7efbf7",
+        "type": "ui_group",
+        "name": "Gauge",
+        "tab": "e1a7148b3e7c808d",
+        "order": 2,
+        "disp": false,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "56bfe6aad72c50ac",
+        "type": "ui_group",
+        "name": "Audio",
+        "tab": "e1a7148b3e7c808d",
+        "order": 3,
+        "disp": false,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e1a7148b3e7c808d",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d27e4ed4ef7733f3",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
